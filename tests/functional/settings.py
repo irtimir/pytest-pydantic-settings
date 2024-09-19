@@ -4,8 +4,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class SomeSettings(BaseSettings):
-    key: str = Field(default='...', json_schema_extra={'key': 'SOME_KEY'})
+    key: str = Field(default='...', alias='KEY')
 
-    model_config = SettingsConfigDict(
-        env_file='tests/functional/.env',
-    )
+    model_config = SettingsConfigDict(extra="ignore",
+                                      env_file_encoding="utf-8",
+                                      env_file="tests/functional/.env",
+                                      populate_by_name=True)
